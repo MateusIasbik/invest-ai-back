@@ -11,7 +11,18 @@ export type AssetsDataWithoutId = Omit<AssetsData, 'id'>
 
 export type MoneyData = {
     id: number;
-    value: number;
+    balance: number;
 }
 
 export type MoneyDataWithoutId = Omit<MoneyData, 'id'>
+
+export type UpsertUser = {
+    frontId: string;
+    assets: AssetsDataWithoutId[];
+    money: number;
+};
+
+export type UserDataResponse = {
+    assets: AssetsData[];
+    money: number;
+};
