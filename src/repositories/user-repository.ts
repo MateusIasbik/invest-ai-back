@@ -12,7 +12,6 @@ async function findByFrontId(frontId: string) {
 }
 
 async function createUserWithData(UpsertUser: UpsertUser) {
-    const { frontId, money, assets } = UpsertUser;
 
     return prisma.user.create({
         data: {
@@ -28,3 +27,4 @@ async function createUserWithData(UpsertUser: UpsertUser) {
         }
     });
 }
+
