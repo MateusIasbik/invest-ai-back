@@ -9,20 +9,13 @@ export type AssetsData = {
 
 export type AssetsDataWithoutId = Omit<AssetsData, 'id'>
 
-export type MoneyData = {
-    id: number;
-    balance: number;
-}
-
-export type MoneyDataWithoutId = Omit<MoneyData, 'id'>
-
 export type UpsertUser = {
     frontId: string;
-    assets: AssetsDataWithoutId[];
     money: number;
+    assets: AssetsDataWithoutId[];
 };
 
 export type UserDataResponse = {
-    assets: AssetsData[];
     money: number;
+    assets: AssetsData[];
 };

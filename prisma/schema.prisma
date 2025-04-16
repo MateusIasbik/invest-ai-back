@@ -14,8 +14,8 @@ model User {
   id        String   @id @default(uuid())
   frontId   String   @unique
   createdAt DateTime @default(now())
+  money Float @default(0)
   assets    Asset[]
-  wallet    Wallet?
 }
 
 model Asset {
@@ -27,11 +27,4 @@ model Asset {
   acquisitionValue Float
   user             User    @relation(fields: [userId], references: [id])
   userId           String
-}
-
-model Wallet {
-  id      Int    @id @default(autoincrement())
-  balance Float
-  user    User   @relation(fields: [userId], references: [id])
-  userId  String @unique
 }
