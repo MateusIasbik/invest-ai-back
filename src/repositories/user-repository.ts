@@ -4,9 +4,11 @@ import { UpsertUser } from "../protocols";
 async function findByFrontId(frontId: string) {
   return prisma.user.findUnique({
     where: { frontId },
-    include: {
+    select: {
+        frontId: true,
+        money: true,
         assets: true
-    }
+      }
   });
 }
 

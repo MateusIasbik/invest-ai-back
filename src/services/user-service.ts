@@ -17,6 +17,7 @@ async function findByFrontId(frontId: string) {
     if (!user) {
         throw notFoundError("ID do usuário")
     }
+    return user;
 }
 
 export const userService = {
