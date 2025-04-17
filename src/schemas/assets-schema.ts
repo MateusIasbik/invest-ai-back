@@ -11,6 +11,6 @@ export const assetSchema = joi.object<AssetsDataWithoutId>({
   
   export const createUserDataSchema = joi.object({
     frontId: joi.string().required(),
-    assets: joi.array().items(assetSchema).required(),
-    money: joi.number().min(0).required()
+    money: joi.number().min(0).required(),
+    assets: joi.array().items(assetSchema).required()
   });

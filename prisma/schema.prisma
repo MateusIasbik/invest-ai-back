@@ -14,7 +14,7 @@ model User {
   id        String   @id @default(uuid())
   frontId   String   @unique
   createdAt DateTime @default(now())
-  money Float @default(0)
+  money     Float @default(0)
   assets    Asset[]
 }
 

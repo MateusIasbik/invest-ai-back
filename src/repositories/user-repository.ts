@@ -10,7 +10,7 @@ async function findByFrontId(frontId: string) {
   });
 }
 
-async function createUserWithData(UpsertUser: UpsertUser) {
+async function createUser(UpsertUser: UpsertUser) {
 
     return prisma.user.create({
         data: {
@@ -23,3 +23,24 @@ async function createUserWithData(UpsertUser: UpsertUser) {
     });
 }
 
+async function updateUser(UpsertUser: UpsertUser) {
+    await prisma.asset.deleteMany({
+        where: { userId: UpsertUser.frontId }
+    });
+    
+    return prisma.user.update({
+        where: { frontId: UpsertUser.frontId },
+        data: {
+            money: UpsertUser.money,
+            assets: {
+                create: UpsertUser.assets
+            }
+        }
+    });
+}
+
+export const userRepository = {
+    findByFrontId,
+    createUser,
+    updateUser
+}
