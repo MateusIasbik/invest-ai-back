@@ -3,12 +3,12 @@ import { UpsertUser } from "../protocols";
 import { userRepository } from "../repositories/user-repository";
 
 
-async function updateUser(UpsertUser: UpsertUser) {
-    const user = await userRepository.findByFrontId(UpsertUser.frontId);
+async function updateUser(data: UpsertUser) {
+    const user = await userRepository.findByFrontId(data.frontId);
     if (!user) {
-        await userRepository.createUser(UpsertUser);
+        await userRepository.createUser(data);
     } else {
-        await userRepository.updateUser(UpsertUser);
+        await userRepository.updateUser(data);
     }
 }
 

@@ -10,30 +10,30 @@ async function findByFrontId(frontId: string) {
   });
 }
 
-async function createUser(UpsertUser: UpsertUser) {
+async function createUser(data: UpsertUser) {
 
     return prisma.user.create({
         data: {
-            frontId: UpsertUser.frontId,
-            money: UpsertUser.money,
+            frontId: data.frontId,
+            money: data.money,
             assets: {
-                create: UpsertUser.assets
+                create: data.assets
             }
         }
     });
 }
 
-async function updateUser(UpsertUser: UpsertUser) {
+async function updateUser(data: UpsertUser) {
     await prisma.asset.deleteMany({
-        where: { userId: UpsertUser.frontId }
+        where: { userId: data.frontId }
     });
     
     return prisma.user.update({
-        where: { frontId: UpsertUser.frontId },
+        where: { frontId: data.frontId },
         data: {
-            money: UpsertUser.money,
+            money: data.money,
             assets: {
-                create: UpsertUser.assets
+                create: data.assets
             }
         }
     });
