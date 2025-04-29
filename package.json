@@ -4,9 +4,10 @@
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
-    "build": "tsc",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "start": "node src/server.js",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "prisma:deploy": "npx prisma migrate deploy",
     "test": "dotenv -e .env.test prisma migrate deploy & dotenv -e .env.test jest -- --runInBand",
     "test:coverage": "npm run test -- --coverage --runInBand",
     "lint": "eslint .",
