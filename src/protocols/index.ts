@@ -1,3 +1,4 @@
+// Ativo com ID (para retorno ao front)
 export type AssetsData = {
     id: number;
     name: string;
@@ -5,17 +6,25 @@ export type AssetsData = {
     amount: number;
     currentValue: number;
     acquisitionValue: number;
-}
-
-export type AssetsDataWithoutId = Omit<AssetsData, 'id'>
-
-export type UpsertUser = {
+  };
+  
+  // Ativo sem ID (usado na entrada do front-end)
+  export type AssetsDataWithoutId = Omit<AssetsData, 'id'>;
+  
+  // Dados recebidos para atualizar ou criar usuário
+  export type UpsertUser = {
     frontId: string;
     money: number;
     assets: AssetsDataWithoutId[];
-};
-
-export type UserDataResponse = {
+  };
+  
+  // Dados retornados ao front-end
+  export type UserDataResponse = {
     money: number;
     assets: AssetsData[];
-};
+  };
+  
+  // Dados recebidos para atualizar ou criar um ativo
+//   export type UpsertAsset = {
+
+//   }

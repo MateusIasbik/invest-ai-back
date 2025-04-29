@@ -21,6 +21,7 @@ async function findByFrontId(req: Request, res: Response, next: NextFunction) {
         const userData = await userService.findByFrontId(frontId);
         return res.status(httpStatus.OK).send(userData);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }

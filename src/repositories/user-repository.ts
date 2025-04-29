@@ -1,48 +1,79 @@
 import prisma from "../database";
-import { UpsertUser } from "../protocols";
+import { AssetsDataWithoutId, UpsertUser } from "../protocols";
 
 async function findByFrontId(frontId: string) {
   return prisma.user.findUnique({
     where: { frontId },
     select: {
-        frontId: true,
-        money: true,
-        assets: true
-      }
+      id: true,
+      frontId: true,
+      money: true,
+      assets: true
+    }
   });
 }
 
 async function createUser(data: UpsertUser) {
-
-    return prisma.user.create({
-        data: {
-            frontId: data.frontId,
-            money: data.money,
-            assets: {
-                create: data.assets
-            }
-        }
-    });
+  return prisma.user.create({
+    data: {
+      frontId: data.frontId,
+      money: data.money,
+      assets: {
+        create: data.assets
+      }
+    }
+  });
 }
 
-async function updateUser(data: UpsertUser) {
-    await prisma.asset.deleteMany({
-        where: { userId: data.frontId }
-    });
-    
-    return prisma.user.update({
-        where: { frontId: data.frontId },
-        data: {
-            money: data.money,
-            assets: {
-                create: data.assets
-            }
-        }
-    });
+async function updateUserMoney(userId: string, money: number) {
+  return prisma.user.update({
+    where: { id: userId },
+    data: { money }
+  });
+}
+
+async function findUserAssetByName(userId: string, name: string) {
+  return prisma.asset.findUnique({
+    where: {
+      userId_name: {
+        userId,
+        name
+      }
+    }
+  });
+}
+
+async function createAsset(userId: string, asset: AssetsDataWithoutId) {
+  return prisma.asset.create({
+    data: {
+      ...asset,
+      userId
+    }
+  });
+}
+
+async function updateAsset(userId: string, asset: AssetsDataWithoutId) {
+  return prisma.asset.update({
+    where: {
+      userId_name: {
+        userId,
+        name: asset.name
+      }
+    },
+    data: {
+      price: asset.price,
+      amount: asset.amount,
+      currentValue: asset.currentValue,
+      acquisitionValue: asset.acquisitionValue
+    }
+  });
 }
 
 export const userRepository = {
-    findByFrontId,
-    createUser,
-    updateUser
-}
+  findByFrontId,
+  createUser,
+  updateUserMoney,
+  findUserAssetByName,
+  createAsset,
+  updateAsset
+};

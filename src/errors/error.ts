@@ -1,6 +1,6 @@
 export function notFoundError(entity: string) {
     return {
-        type: "notFound",
+        name: "NotFound",
         message: `${entity} não encontrado!`
     }
 }
