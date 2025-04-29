@@ -5,10 +5,15 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": "./", // Mantenha a raiz em "./" para permitir testes fora de "src"
+    "baseUrl": "./",  // Agora, "baseUrl" é a raiz do projeto
+    "paths": {
+      "factories/*": ["tests/factories/*"] // Configura o caminho para testes/factories
+    },
     "strict": true,
     "resolveJsonModule": true,
     "types": ["node", "jest"]
   },
-  "include": ["src/**/*.ts", "tests/**/*.ts"]
+  "include": ["src/**/*.ts", "tests/**/*.ts"], // Inclui tanto o código quanto os testes
+  "exclude": ["node_modules"]
 }
