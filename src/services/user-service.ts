@@ -12,12 +12,12 @@ async function updateUser(data: UpsertUser) {
 
   const userId = user.id;
 
-  await userRepository.updateUserMoney(userId, data.money);
-
   if (data.assets.length === 0) {
     await userRepository.updateUserMoney(userId, data.money);
     return;
   }
+
+  await userRepository.updateUserMoney(userId, data.money);
 
   for (const asset of data.assets) {
     const existingAsset = await userRepository.findUserAssetByName(userId, asset.name);
