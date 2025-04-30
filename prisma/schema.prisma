@@ -22,7 +22,7 @@ model Asset {
   id               Int     @id @default(autoincrement())
   name             String
   price            Float
-  amount           Int
+  amount           Decimal @db.Decimal(10, 2)
   currentValue     Float
   acquisitionValue Float
   user             User    @relation(fields: [userId], references: [id])

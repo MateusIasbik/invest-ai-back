@@ -12,7 +12,7 @@ async function updateUser(data: UpsertUser) {
 
   const userId = user.id;
 
-  if (data.assets.length === 0) {
+  if (!data.assets || data.assets.length === 0) {
     await userRepository.updateUserMoney(userId, data.money);
     return;
   }
@@ -21,6 +21,11 @@ async function updateUser(data: UpsertUser) {
 
   for (const asset of data.assets) {
     const existingAsset = await userRepository.findUserAssetByName(userId, asset.name);
+
+    if (asset.amount === 0 && existingAsset) {
+      await userRepository.deleteAsset(userId, asset.name);
+      continue;
+    }
 
     if (existingAsset) {
       await userRepository.updateAsset(userId, asset);

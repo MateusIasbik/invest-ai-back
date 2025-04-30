@@ -69,11 +69,22 @@ async function updateAsset(userId: string, asset: AssetsDataWithoutId) {
   });
 }
 
+async function deleteAsset(userId: string, assetName: string) {
+  return prisma.asset.deleteMany({
+    where: {
+      userId,
+      name: assetName
+    }
+  });
+}
+
+
 export const userRepository = {
   findByFrontId,
   createUser,
   updateUserMoney,
   findUserAssetByName,
   createAsset,
-  updateAsset
+  updateAsset,
+  deleteAsset
 };

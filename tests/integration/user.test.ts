@@ -53,7 +53,7 @@ describe("POST /", () => {
         });
 
         expect(user!.money).toBeCloseTo(updatedData.money, 7);
-        expect(user!.assets[0].amount).toBe(updatedData.assets[0].amount);
+        expect(Number(user!.assets[0].amount)).toBe(updatedData.assets[0].amount);
     });
 
     it("Should only update money when not sending action", async () => {
@@ -103,7 +103,7 @@ describe("GET /:frontId", () => {
             expect.arrayContaining([
                 expect.objectContaining({
                     name: expect.any(String),
-                    amount: expect.any(Number),
+                    amount: expect.anything(),
                     price: expect.any(Number),
                     acquisitionValue: expect.any(Number),
                     currentValue: expect.any(Number),
